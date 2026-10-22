@@ -1,0 +1,473 @@
+{
+ "_comment": "Replayed by the TS facade test (args must match exactly) and by the Rust plugin test (against a real client). $name substitutes a saved result; save: {name: '$'} saves the whole result, {name: 'a.b'} a path. Keep this file identical in both repos.",
+ "steps": [
+  {
+   "call": {
+    "method": "openSessionRaw",
+    "params": []
+   },
+   "cmd": "open_session",
+   "args": {},
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "generateMnemonic",
+    "params": [
+     128,
+     "en"
+    ]
+   },
+   "cmd": "generate_mnemonic",
+   "args": {
+    "strength": 128,
+    "language": "en"
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "generateMnemonic",
+    "params": [
+     256
+    ]
+   },
+   "cmd": "generate_mnemonic",
+   "args": {
+    "strength": 256
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "createAccount",
+    "params": [
+     {
+      "mnemonic": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+      "passphrase": "correct horse battery staple",
+      "label": "Main",
+      "meta": {
+       "notes": "n"
+      },
+      "language": "en"
+     }
+    ]
+   },
+   "cmd": "create_account",
+   "args": {
+    "args": {
+     "mnemonic": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+     "passphrase": "correct horse battery staple",
+     "label": "Main",
+     "meta": {
+      "notes": "n"
+     },
+     "language": "en"
+    }
+   },
+   "expect": "ok",
+   "save": {
+    "id": "id"
+   }
+  },
+  {
+   "call": {
+    "method": "exportAccountMnemonicBackup",
+    "params": [
+     "$id",
+     "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about"
+    ]
+   },
+   "cmd": "export_account_mnemonic_backup",
+   "args": {
+    "id": "$id",
+    "mnemonic": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about"
+   },
+   "expect": "ok",
+   "save": {
+    "backup": "$"
+   }
+  },
+  {
+   "call": {
+    "method": "updateAccountLabel",
+    "params": [
+     "$id",
+     "Renamed"
+    ]
+   },
+   "cmd": "update_account_label",
+   "args": {
+    "id": "$id",
+    "label": "Renamed"
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "lockAccount",
+    "params": [
+     "$id"
+    ]
+   },
+   "cmd": "lock_account",
+   "args": {
+    "id": "$id"
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "ensureIdentityUnlockedRaw",
+    "params": [
+     "$id"
+    ]
+   },
+   "cmd": "ensure_identity_unlocked",
+   "args": {
+    "id": "$id"
+   },
+   "expect": "unlockRequired"
+  },
+  {
+   "call": {
+    "method": "verifyPassphrase",
+    "params": [
+     "$id",
+     "wrong passphrase"
+    ]
+   },
+   "cmd": "verify_passphrase",
+   "args": {
+    "id": "$id",
+    "passphrase": "wrong passphrase"
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "isPassphraseValid",
+    "params": [
+     "correct horse battery staple"
+    ]
+   },
+   "cmd": "is_passphrase_valid",
+   "args": {
+    "passphrase": "correct horse battery staple"
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "isPassphraseValid",
+    "params": [
+     "correct horse battery staple",
+     "$id"
+    ]
+   },
+   "cmd": "is_passphrase_valid",
+   "args": {
+    "passphrase": "correct horse battery staple",
+    "id": "$id"
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "unlockAccount",
+    "params": [
+     "$id",
+     "correct horse battery staple"
+    ]
+   },
+   "cmd": "unlock_account",
+   "args": {
+    "id": "$id",
+    "passphrase": "correct horse battery staple"
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "setActiveAccountRaw",
+    "params": [
+     "$id",
+     false
+    ]
+   },
+   "cmd": "set_active_account",
+   "args": {
+    "id": "$id",
+    "bypassIdentity": false
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "updatePassphrase",
+    "params": [
+     {
+      "id": "$id",
+      "currentPassphrase": "correct horse battery staple",
+      "newPassphrase": "a completely different passphrase"
+     }
+    ]
+   },
+   "cmd": "update_passphrase",
+   "args": {
+    "args": {
+     "id": "$id",
+     "currentPassphrase": "correct horse battery staple",
+     "newPassphrase": "a completely different passphrase"
+    }
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "lockAllAccounts",
+    "params": []
+   },
+   "cmd": "lock_all_accounts",
+   "args": {},
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "replacePassphrase",
+    "params": [
+     {
+      "backup": "$backup",
+      "mnemonic": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+      "newPassphrase": "correct horse battery staple",
+      "id": "$id"
+     }
+    ]
+   },
+   "cmd": "replace_passphrase",
+   "args": {
+    "args": {
+     "backup": "$backup",
+     "mnemonic": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+     "newPassphrase": "correct horse battery staple",
+     "id": "$id"
+    }
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "setState",
+    "params": [
+     "k",
+     "v"
+    ]
+   },
+   "cmd": "state_set",
+   "args": {
+    "key": "k",
+    "value": "v"
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "getState",
+    "params": [
+     "k"
+    ]
+   },
+   "cmd": "state_get",
+   "args": {
+    "key": "k"
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "listState",
+    "params": []
+   },
+   "cmd": "state_list",
+   "args": {},
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "removeState",
+    "params": [
+     "k"
+    ]
+   },
+   "cmd": "state_remove",
+   "args": {
+    "key": "k"
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "exportKeystore",
+    "params": []
+   },
+   "cmd": "keystore_export",
+   "args": {},
+   "expect": "ok",
+   "save": {
+    "rows": "$"
+   }
+  },
+  {
+   "call": {
+    "method": "restoreKeystore",
+    "params": [
+     "$rows"
+    ]
+   },
+   "cmd": "keystore_restore",
+   "args": {
+    "keys": "$rows"
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "importAccountFromMnemonicBackup",
+    "params": [
+     {
+      "backup": "$backup",
+      "mnemonic": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+      "passphrase": "a completely different passphrase"
+     }
+    ]
+   },
+   "cmd": "import_account_from_mnemonic_backup",
+   "args": {
+    "args": {
+     "backup": "$backup",
+     "mnemonic": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+     "passphrase": "a completely different passphrase"
+    }
+   },
+   "expect": "duplicateAccount"
+  },
+  {
+   "call": {
+    "method": "replaceAccountFromMnemonicBackup",
+    "params": [
+     {
+      "backup": "$backup",
+      "mnemonic": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+      "passphrase": "a completely different passphrase",
+      "label": "Replaced"
+     }
+    ]
+   },
+   "cmd": "replace_account_from_mnemonic_backup",
+   "args": {
+    "args": {
+     "backup": "$backup",
+     "mnemonic": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+     "passphrase": "a completely different passphrase",
+     "label": "Replaced"
+    }
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "migrateLegacyIdentities",
+    "params": [
+     [
+      {
+       "id": "",
+       "publicKey": "x",
+       "fingerprint": "y"
+      }
+     ]
+    ]
+   },
+   "cmd": "migrate_legacy_identities",
+   "args": {
+    "identities": [
+     {
+      "id": "",
+      "publicKey": "x",
+      "fingerprint": "y"
+     }
+    ]
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "getSnapshotRaw",
+    "params": []
+   },
+   "cmd": "get_snapshot",
+   "args": {},
+   "expect": "ok",
+   "save": {
+    "contact": "accounts.0"
+   }
+  },
+  {
+   "call": {
+    "method": "removeOwnAccount",
+    "params": [
+     "$id"
+    ]
+   },
+   "cmd": "remove_own_account",
+   "args": {
+    "id": "$id"
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "addOwnAccount",
+    "params": [
+     "$contact"
+    ]
+   },
+   "cmd": "add_own_account",
+   "args": {
+    "account": "$contact"
+   },
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "hasSigningCapabilityRaw",
+    "params": [
+     "$id"
+    ]
+   },
+   "cmd": "has_signing_capability",
+   "args": {
+    "id": "$id"
+   },
+   "expect": "ok",
+   "rustOnly": true
+  },
+  {
+   "call": {
+    "method": "hydrate",
+    "params": []
+   },
+   "cmd": "hydrate",
+   "args": {},
+   "expect": "ok"
+  },
+  {
+   "call": {
+    "method": "resetData",
+    "params": []
+   },
+   "cmd": "reset_data",
+   "args": {},
+   "expect": "ok"
+  }
+ ]
+}
