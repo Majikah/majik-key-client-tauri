@@ -22,3 +22,31 @@ await majik.unlockAccount(id, passphrase);
 - `contract/scenario.json` is the wire contract (the TS test checks the facade sends exactly these
   args; replay the same file against the Rust plugin in your own test).
 - `npm run typecheck && npm test && npm run build`
+
+
+---
+
+## License
+
+**License:** [Apache-2.0](LICENSE) — free for personal and commercial use.
+
+## Author
+
+Developed by **Josef Elijah Fabian (Zelijah)** | [Majikah Solutions OPC](https://majikah.solutions/about)
+
+
+**Developer**: [Josef Elijah Fabian](https://github.com/jedlsf)
+
+**GitHub**: [https://github.com/Majikah](https://github.com/Majikah)
+
+**Project Repository**: [https://github.com/Majikah/majik-key-client-tauri](https://github.com/Majikah/majik-key-client-tauri)
+
+**Technical Whitepaper**: [https://zenodo.org/records/23208491](https://zenodo.org/records/23208491)
+
+---
+
+## Contact
+
+- **Business Email**: [business@majikah.solutions](mailto:business@majikah.solutions)
+- **Official Website**: [https://www.thezelijah.world](https://www.thezelijah.world)
+- **Majikah Ecosystem**: [https://majikah.solutions](https://majikah.solutions)

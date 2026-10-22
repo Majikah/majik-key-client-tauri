@@ -17,6 +17,18 @@
     "dist",
     "contract"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Majikah/majik-key-client-tauri.git"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/jedlsf"
+  },
+  "homepage": "https://github.com/Majikah/majik-key-client-tauri#readme",
+  "bugs": {
+    "url": "https://github.com/Majikah/majik-key-client-tauri/issues"
+  },
   "scripts": {
     "update": "npm install @tauri-apps/api",
     "build": "tsc",
