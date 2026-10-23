@@ -30,10 +30,12 @@
     "url": "https://github.com/Majikah/majik-key-client-tauri/issues"
   },
   "scripts": {
-    "update": "npm install @tauri-apps/api",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "prepublishOnly": "npm run build",
+    "package": "npm run build && npm version patch && git push && git push --tags",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "peerDependencies": {
     "@tauri-apps/api": ">=2.0.0"
