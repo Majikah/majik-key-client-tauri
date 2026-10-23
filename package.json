@@ -1,6 +1,6 @@
 {
   "name": "@majikah/majik-key-client-tauri",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Typed TypeScript facade over tauri-plugin-majik-key-client: all keys and account state live in Rust, this class invokes them.",
   "license": "Apache-2.0",
   "type": "module",
